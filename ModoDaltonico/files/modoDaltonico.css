@@ -1,0 +1,146 @@
+/* ============================================================
+   Modo Daltonico - Accessibility Filters for MantisBT
+   ============================================================ */
+
+/* --- Floating toggle button --- */
+.md-toggle {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 10000;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+.md-toggle-btn {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	border: 2px solid #555;
+	background-color: #fff;
+	color: #333;
+	font-size: 22px;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s, border-color 0.2s;
+	line-height: 1;
+	padding: 0;
+}
+
+.md-toggle-btn:hover {
+	background-color: #eee;
+}
+
+.md-toggle-btn:focus {
+	outline: 3px solid #4a90d9;
+	outline-offset: 2px;
+}
+
+.md-toggle-btn[aria-pressed="true"] {
+	background-color: #3c763d;
+	border-color: #3c763d;
+	color: #fff;
+}
+
+.md-toggle-btn[aria-pressed="true"]:hover {
+	background-color: #2b542c;
+}
+
+/* --- Contrast type selector --- */
+.md-selector {
+	display: none;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	padding: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	min-width: 160px;
+}
+
+.md-selector.md-selector-visible {
+	display: block;
+}
+
+.md-selector label {
+	display: block;
+	padding: 4px 8px;
+	cursor: pointer;
+	font-size: 13px;
+	border-radius: 3px;
+	margin: 0;
+	font-weight: normal;
+}
+
+.md-selector label:hover {
+	background-color: #f0f0f0;
+}
+
+.md-selector input[type="radio"] {
+	margin-right: 6px;
+}
+
+/* --- Active indicator badge --- */
+.md-badge {
+	display: none;
+	position: fixed;
+	bottom: 78px;
+	right: 20px;
+	z-index: 10000;
+	background-color: #3c763d;
+	color: #fff;
+	font-size: 11px;
+	padding: 3px 10px;
+	border-radius: 10px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	pointer-events: none;
+}
+
+.md-badge-visible {
+	display: block;
+}
+
+/* ============================================================
+   Color Vision Deficiency Filters
+   Applied via CSS filter on the page body.
+   These use SVG color matrices to simulate/correct
+   color perception without modifying element colors directly.
+   ============================================================ */
+
+/* --- SVG filters (hidden, referenced by url()) --- */
+
+/* --- Protanopia correction filter --- */
+body.md-active-protanopia {
+	filter: url('#md-filter-protanopia');
+}
+
+/* --- Deuteranopia correction filter --- */
+body.md-active-deuteranopia {
+	filter: url('#md-filter-deuteranopia');
+}
+
+/* --- Tritanopia correction filter --- */
+body.md-active-tritanopia {
+	filter: url('#md-filter-tritanopia');
+}
+
+/* Ensure fixed elements remain above the filtered content */
+body.md-active-protanopia .md-toggle,
+body.md-active-deuteranopia .md-toggle,
+body.md-active-tritanopia .md-toggle,
+body.md-active-protanopia .md-badge,
+body.md-active-deuteranopia .md-badge,
+body.md-active-tritanopia .md-badge {
+	filter: none;
+}
+
+/* Prevent filter from affecting layout or overflow */
+body[class*="md-active-"] {
+	overflow-x: auto;
+}
